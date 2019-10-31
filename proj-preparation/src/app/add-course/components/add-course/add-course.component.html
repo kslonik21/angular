@@ -1,0 +1,27 @@
+<div class='form-wrapper'>
+  <div class='form-container'>
+    <form [formGroup]='courseForm'>
+      <div>
+        <p>Title:</p>
+        <input [formControl]='titleControl' type='text' name='title' placeholder='Title'>
+      </div>
+      <div>
+        <p>Description:</p>
+        <textarea [formControl]='descriptionControl' type='text' name='description' placeholder='Some words about this course'></textarea>
+      </div>
+      <div>
+        <app-creation [formControl]='creationControl'></app-creation>
+      </div>
+      <!-- <div>
+        <app-duration [formControl]='durationControl' [exist]='exist'></app-duration>
+      </div> -->
+      <!--<div>
+        <app-authors></app-authors>
+      </div>-->
+      <div class='buttons'>
+        <button type='button' (click)='onSave()'>Save</button>
+        <button type='button' (click)='onCancel()'>Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,19 @@
+{
+  "users": [
+    {
+      "name": "Alex",
+      "password": "occaecat",
+      "token": "d500625f-60c3-465d-8f4a-3c605edb25c3"
+    },
+    {
+      "name": "Alex",
+      "password": "occaecat",
+      "token": "d500625f-60c3-465d-8f4a-3c605edb25c3"
+    },
+    {
+      "name": "Alex",
+      "password": "occaecat",
+      "token": "d500625f-60c3-465d-8f4a-3c605edb25c3"
+    }
+  ]
+}

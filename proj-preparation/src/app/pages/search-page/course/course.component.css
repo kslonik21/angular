@@ -1,0 +1,9 @@
+.top-rated {
+  background-color: yellow;
+}
+.top-rated::before {
+  content:'\2732';
+}
+.course-headline {
+  font-size: 30px;
+}

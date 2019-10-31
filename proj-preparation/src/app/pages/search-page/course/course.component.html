@@ -1,0 +1,17 @@
+<div class="mt-5 alert alert-primary">
+  <article border="course.creationDate" class="row" [ngClass]="{'top-rated':course.topRated}">
+    <span *ngIf='course.topRated'></span>
+    <h1 class="course-headline col-10">{{course.title }}</h1>
+    <div class="col-8">{{course.description}}</div>
+    <div class="col-2">
+      <div>{{course.duration | duration }}</div>
+      <div>{{course.creationDate | date:'dd.MM.yyyy'}}</div>
+    </div>
+    <div class="text-right col-2">
+      <div class="btn-group-vertical" role="group" aria-label="Basic example">
+        <button class="btn btn-success" type="button" (click)='onEdit(course)'>Edit</button>
+        <button class="btn btn-danger" type="button">Delete</button>
+      </div>
+    </div>
+  </article>
+</div>

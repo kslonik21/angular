@@ -1,0 +1,12 @@
+.no-data {
+  text-align: center;
+}
+.courses-list {
+  list-style: none;
+  width: 70%;
+  margin: auto;
+}
+.courses-container {
+  /* display: flex;
+  justify-content: center; */
+}
