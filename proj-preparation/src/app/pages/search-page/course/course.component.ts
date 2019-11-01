@@ -7,9 +7,10 @@ import { ICourseItem } from './courses-content.model';
   styleUrls: ['./course.component.css'],
 })
 export class CourseComponent {
-  constructor(private router:Router) { }
   @Input() public course: ICourseItem
   @Output() public logId = new EventEmitter<number>();
+  constructor(private router:Router) { }
+
   public onEdit(course: ICourseItem): void {
    this.router.navigate(['courses', course.id]);
  }

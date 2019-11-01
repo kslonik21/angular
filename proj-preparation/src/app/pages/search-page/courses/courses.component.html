@@ -6,16 +6,16 @@
             <button type="button" class="ml-5 btn btn-outline-dark" (click)="setSearchable()">Search</button>
         </div>
         <div class="col text-right">
-          <button type="button" class="btn btn-outline-dark">Add course</button>
+          <button type="button" class="btn btn-outline-dark" (click)='onAddCourse()'>Add course</button>
         </div>
       </div>
     </app-search>
-    <ul class="courses-list">
-      <li *ngFor="let course of courseList | orderBy:'creationDate' | filter: searchText">
-        <app-course [course]="course"(logId)="logId($event)"></app-course>
-      </li>
-    </ul>
-    <div *ngIf='courseList.length===0;else button' class='no-data'>
+    <app-course
+     *ngFor='let course of courses | orderBy: "creation"'
+     [course]='course'
+     (delete)='onDelete($event)'>
+   </app-course>
+    <div *ngIf='courses.length===0;else button' class='no-data'>
       No data. Feel free to add new course.
     </div>
     <ng-template #button><button class="btn btn-outline-dark btn-default btn-block">Load More</button></ng-template>

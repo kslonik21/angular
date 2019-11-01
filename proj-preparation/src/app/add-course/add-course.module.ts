@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddCourseComponent } from './components/add-course/add-course.component';
 import { CreationDateComponent } from './components/creation-date/creation-date.component';
 import { DurationComponent } from './components/duration/duration.component';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -15,9 +16,7 @@ import { DurationComponent } from './components/duration/duration.component';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    SharedModule
   ],
-  exports: [
-    AddCourseComponent,
-  ]
 })
 export class AddCourseModule { }

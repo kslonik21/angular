@@ -25,22 +25,30 @@ export class AddCourseComponent implements OnInit {
   public titleControl: FormControl = new FormControl();
   public descriptionControl: FormControl = new FormControl();
   public creationControl: FormControl = new FormControl();
-  public durationControl: FormControl = new FormControl();
+  // public durationControl: FormControl = new FormControl();
   public courseForm: FormGroup = new FormGroup({
     title: this.titleControl,
     creationDate: this.creationControl,
-    durationDate: this.durationControl,
+    // durationDate: this.durationControl,
     description: this.descriptionControl,
   });
+  private exist = false;
   constructor(private router:Router,private activatedRoute: ActivatedRoute,private courseService: HTTPService, private datePipe: DatePipe){}
   public ngOnInit() {
-      // this.activatedRoute.params.subscribe(data => console.log(data));
-    this.courseService.getCourses().subscribe(courses => {
-      courses.sort((a,b) => a.id-b.id);
-      const id = courses[courses.length-1].id + 1;
-      this.course = new Course(false,id,null,Date.now(),null,null);
-      this.setFormValues();
-      console.log(this.course);
+    this.activatedRoute.params.subscribe(data => {
+      if(data.id!=='new') {
+        this.course = this.courseService.getCourseById(+data.id);
+        this.setFormValues();
+        this.exist = true;
+      } else {
+        this.courseService.getCourses().subscribe(courses => {
+          courses.sort((a,b) => a.id-b.id);
+          const id = courses[courses.length-1].id + 1;
+          this.course = new Course(false,id,this.courseForm.value.title,Date.now(),null,this.courseForm.value.description);
+          console.log(this.course);
+          this.setFormValues();
+        })
+      }
     })
   }
   private setFormValues() {
@@ -51,12 +59,13 @@ export class AddCourseComponent implements OnInit {
     this.creationControl.valueChanges.subscribe((value: string) => {
       console.log('duration', value);
     });
-    console.log(this.courseForm);
-
   }
   public onSave(): void {
+   if (this.exist) {
+     this.courseService.updateCourse(this.course).subscribe(() => this.router.navigate(['courses']));
+   } else {
+     this.courseService.createCourse(this.course).subscribe(() => this.router.navigate(['courses']));
+   }
+ }
 
-    this.courseService.pushCourse(this.course).subscribe(val => console.log(val));
-
-}
 }

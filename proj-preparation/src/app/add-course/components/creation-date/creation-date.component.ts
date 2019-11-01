@@ -17,22 +17,15 @@ export class CreationDateComponent implements ControlValueAccessor, OnInit {
   @Input() public creationDate: string;
   public creationControl: FormControl = new FormControl();
 
-  public onChangeCallback: (data: any) => void;
-  public onTouchedCallback: () => void;
+  public onChange: any = () => {}
+  public onTouch: any = () => {};
 
-  ngOnInit () {
-    this.creationControl.valueChanges.subscribe((value: string) => {
-      this.onChangeCallback(value);
-      this.onTouchedCallback();
-    });
-  }
-
-  public registerOnChange(fn: any): void {
-    this.onChangeCallback = fn;
+  public registerOnChange(fn: any) {
+    this.onChange = fn;
   }
 
   public registerOnTouched(fn: any): void {
-    this.onTouchedCallback = fn;
+    this.onTouch= fn;
   }
 
   setDisabledState(isDisabled: boolean): void {
@@ -40,6 +33,12 @@ export class CreationDateComponent implements ControlValueAccessor, OnInit {
 
   writeValue(value: string): void {
     this.creationControl.setValue(value);
-    console.log(value);
   }
+  ngOnInit () {
+    this.creationControl.valueChanges.subscribe((value: string) => {
+      this.onChange(value);
+      this.onTouch();
+    });
+  }
+
 }
