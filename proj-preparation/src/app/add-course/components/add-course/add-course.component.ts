@@ -40,14 +40,6 @@ export class AddCourseComponent implements OnInit {
         this.course = this.courseService.getCourseById(+data.id);
         this.setFormValues();
         this.exist = true;
-      } else {
-        this.courseService.getCourses().subscribe(courses => {
-          courses.sort((a,b) => a.id-b.id);
-          const id = courses[courses.length-1].id + 1;
-          this.course = new Course(false,id,this.courseForm.value.title,Date.now(),null,this.courseForm.value.description);
-          console.log(this.course);
-          this.setFormValues();
-        })
       }
     })
   }
@@ -61,11 +53,22 @@ export class AddCourseComponent implements OnInit {
     });
   }
   public onSave(): void {
-   if (this.exist) {
-     this.courseService.updateCourse(this.course).subscribe(() => this.router.navigate(['courses']));
-   } else {
-     this.courseService.createCourse(this.course).subscribe(() => this.router.navigate(['courses']));
-   }
- }
-
+    if (!this.exist) {
+      this.courseService.getCourses().subscribe(courses => {
+        courses.sort((a,b) => a.id-b.id);
+        const id = courses[courses.length-1].id + 1;
+        this.course = new Course(false,id,this.courseForm.get('title').value,Date.now(),null,this.courseForm.get('description').value);
+        this.setFormValues();
+        this.courseService.createCourse(this.course).subscribe(() => this.router.navigate(['courses']));
+     })
+    }
+    else {
+      this.activatedRoute.params.subscribe(data => {
+        const targetCourse = this.courseService.getCourseById(+data.id);
+        this.course = new Course(targetCourse.topRated,data.id,this.courseForm.get('title').value,Date.now(),null,this.courseForm.get('description').value);
+        this.setFormValues();
+        this.courseService.updateCourse(this.course).subscribe(() => this.router.navigate(['courses']));
+      })
+    }
+  }
 }
