@@ -23,9 +23,9 @@ export class HTTPService {
   public getCourseById(id: number): ICourseItem {
     return this.courses.find(course => course.id === id);
   }
-  // public deleteCourse(course: ICourseItem): Observable<ICourseItem> {
-  //   return this.http.delete<ICourseItem>(`${this.URL}/${id}`);
-  // }
+  public deleteCourse(id: number): Observable<ICourseItem> {
+    return this.http.delete<ICourseItem>(`${this.URL}/${id}`);
+  }
   public updateCourse(course: ICourseItem): Observable<ICourseItem> {
     return this.http.put<ICourseItem>(`${this.URL}/${course.id}`, course);
   }

@@ -2,7 +2,7 @@
 	"users": [
   {
     "id": 6093,
-    "fakeToken": "58ebfdf7f1f558c5c86e17f6",
+    "token": "58ebfdf7f1f558c5c86e17f6",
     "name": {
       "first": "Ines",
       "last": "Lowe"
@@ -12,7 +12,7 @@
   },
   {
     "id": 2905,
-    "fakeToken": "58ebfdf7ec92657b493b24da",
+    "token": "58ebfdf7ec92657b493b24da",
     "name": {
       "first": "Brock",
       "last": "Beasley"
@@ -22,7 +22,7 @@
   },
   {
     "id": 3619,
-    "fakeToken": "58ebfdf772a49d09aeee10a8",
+    "token": "58ebfdf772a49d09aeee10a8",
     "name": {
       "first": "Aurelia",
       "last": "Franks"
@@ -32,7 +32,7 @@
   },
   {
     "id": 3117,
-    "fakeToken": "58ebfdf7b2bab0bdb97711f4",
+    "token": "58ebfdf7b2bab0bdb97711f4",
     "name": {
       "first": "Serena",
       "last": "Henson"
@@ -42,7 +42,7 @@
   },
   {
     "id": 5357,
-    "fakeToken": "58ebfdf7279c92a711dc8918",
+    "token": "58ebfdf7279c92a711dc8918",
     "name": {
       "first": "Carlson",
       "last": "Marsh"
@@ -52,7 +52,7 @@
   },
   {
     "id": 7868,
-    "fakeToken": "58ebfdf72728b878deec25aa",
+    "token": "58ebfdf72728b878deec25aa",
     "name": {
       "first": "Rae",
       "last": "Gonzales"
@@ -62,7 +62,7 @@
   },
   {
     "id": 3044,
-    "fakeToken": "58ebfdf7cdb7d7e179910a13",
+    "token": "58ebfdf7cdb7d7e179910a13",
     "name": {
       "first": "Dawson",
       "last": "Bowen"
@@ -72,7 +72,7 @@
   },
   {
     "id": 1461,
-    "fakeToken": "58ebfdf7bf15103f01c22a77",
+    "token": "58ebfdf7bf15103f01c22a77",
     "name": {
       "first": "Haney",
       "last": "Hill"
@@ -82,7 +82,7 @@
   },
   {
     "id": 4128,
-    "fakeToken": "58ebfdf743bcda131c777cd1",
+    "token": "58ebfdf743bcda131c777cd1",
     "name": {
       "first": "Gilda",
       "last": "Donaldson"
@@ -92,7 +92,7 @@
   },
   {
     "id": 6622,
-    "fakeToken": "58ebfdf7a36d4ad36cc693f8",
+    "token": "58ebfdf7a36d4ad36cc693f8",
     "name": {
       "first": "Colleen",
       "last": "Day"

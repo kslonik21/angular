@@ -23,8 +23,8 @@ export class HeaderComponent implements OnInit {
     })
   }
   public onLogout(): void {
-   this.userService.logout();
-   this.router.navigate(['auth']);
+    this.userService.logout();
+    this.router.navigate(['auth']);
  }
  public isAuthenticated(): boolean {
    return this.userService.isAuthenticated();

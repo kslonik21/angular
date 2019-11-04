@@ -10,25 +10,35 @@ import { ICourseItem } from '../course/courses-content.model';
   styleUrls: ['./courses.component.css'],
 })
 export class CoursesComponent implements OnInit {
-  public searchable: string = '';
-  public searchText: string = '';
   public courses: ICourseItem[] = [];
+  public currentPage = 0;
+  public lastPage = 0;
   constructor(private coursesService: HTTPService,private router:Router) {}
   public ngOnInit(): void {
     this.getCourses();
   }
   private getCourses(): void {
-    this.coursesService.getCourses().subscribe(courses => {
+    this.coursesService.getCoursesWithParams(0).subscribe(courses => {
       this.courses = courses;
       this.coursesService.courses = this.courses;
     });
-}
-  public setSearchable(): void{
-    this.searchable = this.searchText;
-  };
-
-  public logId(id: number): void {
-    console.log(id);
+  }
+  public onDelete(course: ICourseItem): void {
+    this.coursesService.deleteCourse(course.id).subscribe(() => {
+      this.currentPage = 0;
+      this.coursesService.getCoursesWithParams(this.currentPage).subscribe(courses => {
+        this.courses = courses;
+        this.coursesService.courses = this.courses;
+      });
+    });
+  }
+  public onShowMore() {
+    this.coursesService.getCoursesWithParams(++this.currentPage* +this.coursesService.pagination)
+     .subscribe(courses => {
+       this.courses = this.courses.concat(courses);
+       this.coursesService.courses = this.courses;
+       this.lastPage = !courses.length;
+     })
   }
   public onAddCourse(): void {
     this.router.navigate(['courses', 'new']);

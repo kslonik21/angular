@@ -18,5 +18,5 @@
     <div *ngIf='courses.length===0;else button' class='no-data'>
       No data. Feel free to add new course.
     </div>
-    <ng-template #button><button class="btn btn-outline-dark btn-default btn-block">Load More</button></ng-template>
+    <ng-template #button><button (click)="onShowMore()" class="btn btn-outline-dark btn-default btn-block">Load More</button></ng-template>
 </div>

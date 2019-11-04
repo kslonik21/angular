@@ -14,25 +14,22 @@ module.exports = (server) => {
 		if(!matchedUser) {
 			res.status(401).send('Wrong username');
 		} else if(matchedUser.password === req.body.password) {
-			res.json({ token: matchedUser.fakeToken});
+			res.json({ token: matchedUser.token});
 		} else {
 			res.status(401).send("Wrong password");
 		}
 	});
-		
-	router.post('/auth/userinfo', (req, res, next) => {
-		let users = server.db.getState().users,
-			matchedUser = users.find((user) => {
-				console.log(user);
-				return user.fakeToken === req.header('Authorization');
-			});
 
-		if(!matchedUser) {
+	router.post('/auth/userinfo', (req, res) => {
+		const users = server.db.getState().users;
+		const matchedUser = users.find(user => user.token === req.body.token);
+
+		if (!matchedUser) {
 			res.status(401).send('Unauthorized');
 		} else {
 			res.json(matchedUser);
 		}
 	});
 
-	return router;
+return router;
 };
