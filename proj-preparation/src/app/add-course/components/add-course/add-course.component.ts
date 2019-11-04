@@ -25,11 +25,11 @@ export class AddCourseComponent implements OnInit {
   public titleControl: FormControl = new FormControl();
   public descriptionControl: FormControl = new FormControl();
   public creationControl: FormControl = new FormControl();
-  // public durationControl: FormControl = new FormControl();
+  public durationControl: FormControl = new FormControl();
   public courseForm: FormGroup = new FormGroup({
     title: this.titleControl,
     creationDate: this.creationControl,
-    // durationDate: this.durationControl,
+    duration: this.durationControl,
     description: this.descriptionControl,
   });
   private exist = false;
@@ -40,6 +40,7 @@ export class AddCourseComponent implements OnInit {
         this.course = this.courseService.getCourseById(+data.id);
         this.setFormValues();
         this.exist = true;
+        console.log(this.course);
       }
     })
   }
@@ -47,7 +48,7 @@ export class AddCourseComponent implements OnInit {
     this.titleControl.setValue(this.course.title);
     this.descriptionControl.setValue(this.course.description);
     this.creationControl.setValue(this.datePipe.transform(this.course.creationDate, 'dd.MM.yyyy'));
-    this.creationControl.setValue(this.course.duration);
+    this.durationControl.setValue(this.course.duration);
     this.creationControl.valueChanges.subscribe((value: string) => {
       console.log('duration', value);
     });
@@ -57,7 +58,7 @@ export class AddCourseComponent implements OnInit {
       this.courseService.getCourses().subscribe(courses => {
         courses.sort((a,b) => a.id-b.id);
         const id = courses[courses.length-1].id + 1;
-        this.course = new Course(false,id,this.courseForm.get('title').value,Date.now(),null,this.courseForm.get('description').value);
+        this.course = new Course(false,id,this.courseForm.get('title').value,Date.now(),this.courseForm.get('duration').value,this.courseForm.get('description').value);
         this.setFormValues();
         this.courseService.createCourse(this.course).subscribe(() => this.router.navigate(['courses']));
      })
@@ -65,7 +66,7 @@ export class AddCourseComponent implements OnInit {
     else {
       this.activatedRoute.params.subscribe(data => {
         const targetCourse = this.courseService.getCourseById(+data.id);
-        this.course = new Course(targetCourse.topRated,data.id,this.courseForm.get('title').value,Date.now(),null,this.courseForm.get('description').value);
+        this.course = new Course(targetCourse.topRated,data.id,this.courseForm.get('title').value,Date.now(),this.courseForm.get('duration').value,this.courseForm.get('description').value);
         this.setFormValues();
         this.courseService.updateCourse(this.course).subscribe(() => this.router.navigate(['courses']));
       })

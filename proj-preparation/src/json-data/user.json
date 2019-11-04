@@ -1,19 +1,44 @@
 {
-  "users": [
+	"users": [
     {
-      "name": "Alex",
-      "password": "occaecat",
-      "token": "d500625f-60c3-465d-8f4a-3c605edb25c3"
+      "id": 1,
+      "token": "685723f2-d5c9-4276-be04-b48dd9a6af73",
+      "name": {
+        "first": "Quinn",
+        "last": "Bowen"
+      },
+      "login": "proident",
+      "password": "occaecat"
     },
     {
-      "name": "Alex",
-      "password": "occaecat",
-      "token": "d500625f-60c3-465d-8f4a-3c605edb25c3"
+      "id": 2,
+      "token": "d500625f-60c3-465d-8f4a-3c605edb25c3",
+      "name": {
+        "first": "Delaney",
+        "last": "Gonzales"
+      },
+      "login": "est",
+      "password": "excepteur"
     },
     {
-      "name": "Alex",
-      "password": "occaecat",
-      "token": "d500625f-60c3-465d-8f4a-3c605edb25c3"
+      "id": 3,
+      "token": "0baeb12a-11e6-4f11-b361-983c4b5c00cd",
+      "name": {
+        "first": "Raquel",
+        "last": "Gallagher"
+      },
+      "login": "excepteur",
+      "password": "laborum"
+    },
+    {
+      "id": 4,
+      "token": "6aaf55bd-738b-49fd-ba83-0eac39f6738a",
+      "name": {
+        "first": "Greene",
+        "last": "Black"
+      },
+      "login": "aliqua",
+      "password": "consequat"
     }
   ]
 }

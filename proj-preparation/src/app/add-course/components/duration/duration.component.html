@@ -1,9 +1,5 @@
 <p>Duration:</p>
 <input type='text' name='duration'
-       [formControl]='duration'
-       [value]="inputValue"
-       (keyup)="setInputOnChange(courseDurationInput.value)"
-       (blur)="setInputOnTouched(courseDurationInput.value)"
-       [disabled]="disabled">
-       disabled="{{exist}}">
+       [formControl]='durationControl'
+    />
 <span></span>

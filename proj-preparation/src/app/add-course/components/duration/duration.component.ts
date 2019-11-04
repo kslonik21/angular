@@ -1,7 +1,7 @@
 import { Component, forwardRef, Input} from '@angular/core';
-import { NG_VALUE_ACCESSOR } from '@angular/forms';
-import { CreationDateComponent } from '../creation-date/creation-date.component';
 
+import { CreationDateComponent } from '../creation-date/creation-date.component';
+import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
 @Component({
   selector: 'app-duration',
   templateUrl: './duration.component.html',
@@ -9,13 +9,39 @@ import { CreationDateComponent } from '../creation-date/creation-date.component'
   providers: [
    {
      provide: NG_VALUE_ACCESSOR,
-     useExisting: forwardRef(() => CreationDateComponent),
+     useExisting: forwardRef(() =>  DurationComponent),
      multi: true
    }
  ]
 })
 
-export class DurationComponent {
+export class DurationComponent implements ControlValueAccessor {
   @Input() exist: boolean;
   @Input() duration: number;
+  public durationControl: FormControl = new FormControl();
+
+  public onChange: any = () => {}
+  public onTouch: any = () => {};
+
+  public registerOnChange(fn: any) {
+    this.onChange = fn;
+  }
+
+  public registerOnTouched(fn: any): void {
+    this.onTouch= fn;
+  }
+
+  setDisabledState(isDisabled: boolean): void {
+  }
+
+  writeValue(value: string): void {
+    this.durationControl.setValue(value);
+  }
+  ngOnInit () {
+    this.durationControl.valueChanges.subscribe((value: string) => {
+      this.onChange(value);
+      this.onTouch();
+    });
+  }
+
 }

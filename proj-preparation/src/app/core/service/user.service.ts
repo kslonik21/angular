@@ -1,47 +1,43 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { tap } from 'rxjs/operators';
+import { Router } from '@angular/router';
+import { IUser } from '../../shared/components/login/login.model';
 
-import { User } from '../../shared/components/login/login.model';
-// const storageName = 'usermodel';
-// const userData = [
-//   {name: 'Alex'},
-//   {name: "Tom"}
-// ];
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  public user: User[];
-  private storageData;
-  public URL = 'http://localhost:3000/users';
+  public userSubject = new Subject<IUser>();
+  public tokenLocalStorageKey = 'token';
+  private URL = 'http://localhost:3004/auth';
 
-  constructor(private http: HttpClient) {}
-    // this.storageData = JSON.parse(localStorage.getItem(storageName)) || userData;
+  constructor(private router:Router,private http: HttpClient) {
+    this.getUserInfo();
+  }
+  public login(login: string, password: string): Observable<any> {
+    return this.http.post<any>(`${this.URL}/login`, {login,password})
+      .pipe(
+        tap((result: any) => {
+          localStorage.setItem(this.tokenLocalStorageKey,result.token);
+          this.getUserInfo();
+        })
+      );
+  }
+  public logout(): void {
+    localStorage.removeItem(this.tokenLocalStorageKey);
+  }
 
-  // get() {
-  //   return [...this.storageData]
-  // }
-  public getUsers(): Observable<User[]> {
-    return this.http.get<User[]>(this.URL);
+  public isAuthenticated(): boolean {
+    return !!localStorage.getItem(this.tokenLocalStorageKey);
   }
-  public pushUser(u: User): Observable<User> {
-    return this.http.post<User>(this.URL, u);
+  public getUserInfo(): void {
+    if(this.isAuthenticated()) {
+      this.http.post<IUser>(`${this.URL}/userinfo`, {token: localStorage.getItem(this.tokenLocalStorageKey)})
+        .subscribe((user: IUser) => this.userSubject.next(user));
+    }
   }
- //  update() {
- //   localStorage.setItem(storageName, JSON.stringify(this.storageData));
- //   return this.get();
- // }
- //  post(user) {
- //    this.storageData.push(user);
- //    return this.update();
- //  }
- //  userIndex(user) {
- //    return this.storageData.indexOf(user);
- //  }
- //  destroy(user) {
- //    this.storageData.splice(this.userIndex(user),1);
- //    return this.update();
- //  }
 }

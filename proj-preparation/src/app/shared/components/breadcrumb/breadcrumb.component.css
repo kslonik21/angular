@@ -1,0 +1,16 @@
+div {
+  height: 40px;
+  padding: 6px 20px;
+  background-color: #F6F6FD;
+  line-height: 40px;
+  font-weight: 600;
+  color: #221B9C;
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+.last {
+  color: #BBB9C8;
+}

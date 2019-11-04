@@ -1,42 +1,20 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 // import { AuthService } from '../../../core/service/auth.service';
 import { UserService } from '../../../core/service/user.service';
-import { User } from './login.model';
-
+import { IUser } from './login.model';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
 
-export class LoginComponent implements OnInit {
-  public list=[];
-  public username: string;
-  public pass: string;
-  // @Output() public clicked: EventEmitter<boolean> = new EventEmitter();
-  constructor(private userStorageService: UserService){}
-  ngOnInit() {
-    this.retrieveUser();
-    console.log(this.list);
-  }
-  retrieveUser() {
-    this.userStorageService.getUsers().subscribe(val => {
-      this.list = val;
-    })
-  }
-  // isVisible() {
-  //   this.clicked.emit(true);
-  // }
+export class LoginComponent {
+  public login: string;
+  public password: string;
 
- //  displayCourses() {
- //    console.log(this.userStorageService.isAuth());
- //  }
- //  addItem(name): void {
- //   this.userList = this.userStorageService.addItem({name});
- //   console.log(localStorage);
- // }
- // deleteItem(name) {
- //   this.userList = this.userStorageService.delete({name});
- //   console.log(localStorage);
- // }
+  constructor(private router: Router,private userService: UserService){}
+  public logIn() {
+    this.userService.login(this.login,this.password).subscribe(() => this.router.navigate(['courses']), error => alert(error.error));
+  }
 }

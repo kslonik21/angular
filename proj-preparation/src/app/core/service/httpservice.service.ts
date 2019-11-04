@@ -8,7 +8,7 @@ import { ICourseItem } from '../../pages/search-page/course/courses-content.mode
 export class HTTPService {
   public courses: ICourseItem[];
   public pagination = '10';
-  private URL = 'http://localhost:3000/courses';
+  private URL = 'http://localhost:3004/courses';
 
   constructor(private http: HttpClient) {}
   public getCoursesWithParams(start: number, textFragment: string = ''): Observable<ICourseItem[]> {

@@ -3,11 +3,11 @@
   		<div class="col-10">
         <p>Logo</p>
       </div>
-      <div class="col" *ngIf='false'>
-        <input class="border-0 form-control" placeholder="{{userLoginPlaceholder}}">
+      <div class="col" *ngIf='isAuthenticated()'>
+        <p>You're signed in as <span>{{name.first}} {{name.last}}</span></p>
       </div>
-      <div class="text-right col" *ngIf='false'>
-        <button type="button" class="btn btn-outline-dark .navbar-right">{{buttonLogOffText}}</button>
+      <div class="text-right col" *ngIf='isAuthenticated()'>
+        <button type="button" class="btn btn-outline-dark .navbar-right" (click)="onLogout()"></button>
       </div>
   </div>
 </div>

@@ -1,5 +1,8 @@
-<div class="row">
-  <div class="pl-4 col-xs-2">
-    <input type="button" value="{{breadcrumbText}}">
-  </div>
+<div *ngIf='getBreadcrumbsLength() > 1'>
+  <span *ngFor='let breadcrumb of getBreadcrumbs(); let last = last; let index = index'>
+    <span (click)='navigateFromBreadcrumbs(index)' *ngIf='!last' class='clickable'>{{breadcrumb}}</span>
+    <span *ngIf='!last'> / </span>
+    <span *ngIf='last' class='last'>{{getLastBreadcrumb()}}</span>
+  </span>
 </div>
+<div *ngIf='getBreadcrumbsLength() === 1'>{{getBreadcrumbs()[0]}}</div>
