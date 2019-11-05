@@ -15,6 +15,11 @@ export class LoginComponent {
 
   constructor(private router: Router,private userService: UserService){}
   public logIn() {
-    this.userService.login(this.login,this.password).subscribe(() => this.router.navigate(['courses']), error => alert(error.error));
+    this.userService
+      .login(this.login,this.password)
+      .subscribe(
+        () => this.router.navigate(['courses']),
+        error => alert(error.error)
+      );
   }
 }

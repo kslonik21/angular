@@ -17,10 +17,10 @@ export class UserService {
     // this.getUserInfo();
   }
   public login(login: string, password: string): Observable<any> {
-    return this.http.post<any>(`${this.URL}/login`, {login,password})
+    const body = {login,password};
+    return this.http.post<any>(`${this.URL}/login`, body)
       .pipe(
         tap((result: any) => {
-          console.log(result);
           localStorage.setItem(this.tokenLocalStorageKey,result.token);
           this.getUserInfo();
         })
@@ -31,11 +31,14 @@ export class UserService {
   }
 
   public isAuthenticated(): boolean {
-    return !!localStorage.getItem(this.tokenLocalStorageKey);
+    return localStorage.getItem(this.tokenLocalStorageKey) ? true : false;
   }
   public getUserInfo(): void {
+    const body = {
+      token: localStorage.getItem(this.tokenLocalStorageKey)
+    }
     if (this.isAuthenticated()) {
-      this.http.post<IUser>(`${this.URL}/userinfo`, {token: localStorage.getItem(this.tokenLocalStorageKey)})
+      this.http.post<IUser>(`${this.URL}/userinfo`, body)
         .subscribe((user: IUser) => this.userSubject.next(user));
     }
   }

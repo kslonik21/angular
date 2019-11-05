@@ -11,8 +11,10 @@ export class HTTPService {
   private URL = 'http://localhost:3004/courses';
 
   constructor(private http: HttpClient) {}
+
   public getCoursesWithParams(start: number, textFragment: string = ''): Observable<ICourseItem[]> {
-   return this.http.get<ICourseItem[]>(this.URL, {params: {start: `${start}`, count: this.pagination, textFragment: textFragment}});
+    const params = {start: `${start}`, count: this.pagination, textFragment: textFragment};
+    return this.http.get<ICourseItem[]>(this.URL, {params: params});
  }
   public getCourses(): Observable<ICourseItem[]> {
     return this.http.get<ICourseItem[]>(this.URL);

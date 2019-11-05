@@ -16,7 +16,6 @@ import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from '@angular/f
 export class CreationDateComponent implements ControlValueAccessor, OnInit {
   @Input() public creationDate: string;
   public creationControl: FormControl = new FormControl();
-
   public onChange: any = () => {}
   public onTouch: any = () => {};
 

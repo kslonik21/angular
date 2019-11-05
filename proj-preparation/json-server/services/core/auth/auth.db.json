@@ -99,6 +99,16 @@
     },
     "login": "Olsen",
     "password": "in"
+  },
+	{
+    "id": 1122,
+    "token": "28qbfdf7a36d4ad36ww693f8",
+    "name": {
+      "first": "Aliaksandr",
+      "last": "Taranishyn"
+    },
+    "login": "admin",
+    "password": "123"
   }
 ]
 }

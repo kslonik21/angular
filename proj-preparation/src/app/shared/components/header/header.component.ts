@@ -16,11 +16,12 @@ export class HeaderComponent implements OnInit {
   }
   constructor(private userService: UserService,private router: Router) {}
   public ngOnInit() {
-    this.userService.userSubject.subscribe((user: IUser) => {
-      if (user) {
-        this.name = user.name;
-      }
-    })
+    this.userService.userSubject
+      .subscribe((user: IUser) => {
+        if (user) {
+          this.name = user.name;
+        }
+      })
   }
   public onLogout(): void {
     this.userService.logout();
