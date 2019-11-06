@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { HTTPService } from '../../../core/service/httpservice.service';
+import { CourseService } from '../../../core/service/course.service';
 
 @Component({
   selector: 'app-breadcrumb',
@@ -8,7 +8,7 @@ import { HTTPService } from '../../../core/service/httpservice.service';
   styleUrls: ['./breadcrumb.component.css']
 })
 export class BreadcrumbComponent {
-  constructor(private router: Router, private coursesService: HTTPService) {}
+  constructor(private router: Router, private coursesService: CourseService) {}
 
   public getBreadcrumbsLength() {
     return this.router.url.slice(1).split('/').length;

@@ -3,14 +3,11 @@ const router = express.Router();
 const url = require('url');
 
 module.exports = (server) => {
-
 	router.post('/auth/login', (req, res, next) => {
-		let users = server.db.getState().users,
-			matchedUser = users.find((user) => {
-				console.log(user);
-				return user.login.toUpperCase() === req.body.login.toUpperCase();
-			});
-
+		let users = server.db.getState().users;
+		let matchedUser = users.find((user) => {
+			return user.login.toUpperCase() === req.body.login.toUpperCase();
+		});
 		if(!matchedUser) {
 			res.status(401).send('Wrong username');
 		} else if(matchedUser.password === req.body.password) {
@@ -30,6 +27,5 @@ module.exports = (server) => {
 			res.json(matchedUser);
 		}
 	});
-
-return router;
+	return router;
 };

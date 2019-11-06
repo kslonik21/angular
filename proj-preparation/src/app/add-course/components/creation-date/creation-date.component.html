@@ -1,2 +1,2 @@
   <p>Creation:</p>
-  <input [formControl]="creationControl" name="creationDate" type="text">
+  <input [name]="creationDate" (blur)="onTouched()" [disabled]="disabled" (input)="onChange($event.target.value)" type="text">

@@ -1,4 +1,5 @@
 import { IName } from './name.model';
+
 export interface IUser {
   id: number,
   token: string,

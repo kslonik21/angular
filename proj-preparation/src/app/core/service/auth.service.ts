@@ -1,26 +1,43 @@
-// // import { UserService } from './user.service';
-// import { Injectable } from '@angular/core';
-//
-// @Injectable({
-//   providedIn: 'root'
-// })
-//  class AuthService {
-//   public auth:boolean = false;
-//   constructor() {}
-//     getUserList(){
-//       return this.uservice.get();
-//     };
-//     updateList() {
-//       return this.uservice.update();
-//     }
-//     addItem(item) {
-//       return this.uservice.post(item);
-//     };
-//     delete(item) {
-//       return this.uservice.destroy(item);
-//     }
-//     isAuth() {
-//       // this.auth = !this.auth;
-//       return this.auth ? !this.auth : this.auth;
-//     }
-// }
+import { Injectable } from '@angular/core';
+import { Observable, Subject } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { tap } from 'rxjs/operators';
+import { Router } from '@angular/router';
+import { IUser } from '../../shared/interfaces/login.model';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class AuthService {
+  public userSubject = new Subject<IUser>();
+  public tokenLocalStorageKey = 'token';
+  private URL = 'http://localhost:3004/auth';
+
+  constructor(private router:Router,private http: HttpClient) {}
+  public login(login: string, password: string): Observable<any> {
+    const body = {login,password};
+    return this.http.post<any>(`${this.URL}/login`, body)
+      .pipe(
+        tap((result: any) => {
+          localStorage.setItem(this.tokenLocalStorageKey,result.token);
+          this.getUserInfo();
+        })
+      );
+  }
+  public logout(): void {
+    localStorage.removeItem(this.tokenLocalStorageKey);
+  }
+
+  public isAuthenticated(): boolean {
+    return localStorage.getItem(this.tokenLocalStorageKey) ? true : false;
+  }
+  public getUserInfo(): void {
+    const body = {
+      token: localStorage.getItem(this.tokenLocalStorageKey)
+    }
+    if (this.isAuthenticated()) {
+      this.http.post<IUser>(`${this.URL}/userinfo`, body)
+        .subscribe((user: IUser) => this.userSubject.next(user));
+    }
+  }
+}

@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { IName } from '../login/name.model';
 import { Router } from '@angular/router';
-import { UserService } from '../../../core/service/user.service';
-import { IUser } from '../login/login.model';
+import { AuthService } from '../../../core/service/auth.service';
+import { IUser } from '../../interfaces/login.model';
+import { IName } from '../../interfaces/name.model';
+
 
 @Component({
   selector: 'app-header',
@@ -14,20 +15,24 @@ export class HeaderComponent implements OnInit {
     first:'',
     last:''
   }
-  constructor(private userService: UserService,private router: Router) {}
+  constructor(private authService: AuthService,private router: Router) {}
   public ngOnInit() {
-    this.userService.userSubject
+    this.initUser();
+  }
+  public initUser() {
+    this.authService.userSubject
       .subscribe((user: IUser) => {
         if (user) {
           this.name = user.name;
+          console.log(this.name);
         }
       })
   }
   public onLogout(): void {
-    this.userService.logout();
+    this.authService.logout();
     this.router.navigate(['auth']);
  }
  public isAuthenticated(): boolean {
-   return this.userService.isAuthenticated();
+   return this.authService.isAuthenticated();
  }
 }

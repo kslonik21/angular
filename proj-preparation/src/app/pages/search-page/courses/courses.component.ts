@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { HTTPService } from '../../../core/service/httpservice.service';
+import { CourseService } from '../../../core/service/course.service';
 import { Router } from '@angular/router';
-import { ICourseItem } from '../course/courses-content.model';
+import { ICourseItem } from '../../../shared/interfaces/courses-content.model';
 
 @Component({
   selector: 'app-courses',
@@ -13,7 +13,7 @@ export class CoursesComponent implements OnInit {
   public currentPage = 0;
   public lastPage = false;
   private searchValue: string;
-  constructor(private coursesService: HTTPService,private router:Router) {}
+  constructor(private coursesService: CourseService,private router:Router) {}
   public ngOnInit(): void {
     this.getCourses();
   }
@@ -57,11 +57,11 @@ export class CoursesComponent implements OnInit {
   }
   public onShowMore() {
     this.coursesService
-      .getCoursesWithParams(++this.currentPage* +this.coursesService.pagination)
+      .getCoursesWithParams(++this.currentPage* +this.coursesService.pagination,this.searchValue)
       .subscribe(courses => {
         this.courses = this.courses.concat(courses);
         this.coursesService.courses = this.courses;
-        this.lastPage = !courses.length;
+        // this.lastPage = !courses.length;
       })
   }
 

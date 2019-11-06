@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { ICourseItem } from '../../pages/search-page/course/courses-content.model';
+import { ICourseItem } from '../../shared/interfaces/courses-content.model';
+
 @Injectable({
   providedIn: 'root'
 })
-export class HTTPService {
+export class CourseService {
   public courses: ICourseItem[];
   public pagination = '10';
   private URL = 'http://localhost:3004/courses';

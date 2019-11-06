@@ -1,10 +1,11 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { ICourseItem } from '../../../pages/search-page/course/courses-content.model';
-import { HTTPService } from '../../../core/service/httpservice.service';
+import { CourseService } from '../../../core/service/course.service';
 import { Course } from '../../../shared/entities/course';
 import { DatePipe } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ICourseItem } from '../../../shared/interfaces/courses-content.model';
+
 @Component({
   selector: 'app-add-course',
   templateUrl: './add-course.component.html',
@@ -28,7 +29,7 @@ export class AddCourseComponent implements OnInit {
   constructor(
     private router:Router,
     private activatedRoute: ActivatedRoute,
-    private courseService: HTTPService,
+    private courseService: CourseService,
     private datePipe: DatePipe
   ){}
 

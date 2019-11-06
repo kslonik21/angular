@@ -1,5 +1,4 @@
-import { Component, forwardRef, Input} from '@angular/core';
-
+import { Component, forwardRef, Input, OnInit} from '@angular/core';
 import { CreationDateComponent } from '../creation-date/creation-date.component';
 import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
 @Component({
@@ -15,25 +14,20 @@ import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from '@angular/f
  ]
 })
 
-export class DurationComponent implements ControlValueAccessor {
+export class DurationComponent implements ControlValueAccessor,OnInit {
   @Input() exist: boolean;
   @Input() duration: number;
   public durationControl: FormControl = new FormControl();
-
   public onChange: any = () => {}
   public onTouch: any = () => {};
-
   public registerOnChange(fn: any) {
     this.onChange = fn;
   }
-
   public registerOnTouched(fn: any): void {
     this.onTouch= fn;
   }
-
   setDisabledState(isDisabled: boolean): void {
   }
-
   writeValue(value: string): void {
     this.durationControl.setValue(value);
   }
@@ -43,5 +37,4 @@ export class DurationComponent implements ControlValueAccessor {
       this.onTouch();
     });
   }
-
 }

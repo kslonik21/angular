@@ -13,12 +13,12 @@ import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from '@angular/f
     }
   ]
 })
-export class CreationDateComponent implements ControlValueAccessor, OnInit {
+export class CreationDateComponent implements ControlValueAccessor {
   @Input() public creationDate: string;
-  public creationControl: FormControl = new FormControl();
+
   public onChange: any = () => {}
   public onTouch: any = () => {};
-
+  private disabled: boolean = true;
   public registerOnChange(fn: any) {
     this.onChange = fn;
   }
@@ -28,16 +28,11 @@ export class CreationDateComponent implements ControlValueAccessor, OnInit {
   }
 
   setDisabledState(isDisabled: boolean): void {
+    this.disabled = isDisabled;
   }
 
   writeValue(value: string): void {
-    this.creationControl.setValue(value);
-  }
-  ngOnInit () {
-    this.creationControl.valueChanges.subscribe((value: string) => {
-      this.onChange(value);
-      this.onTouch();
-    });
-  }
+    this.creationDate = value;
 
+  }
 }

@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnInit, Input, Output} from '@angular/core';
 import { Router } from '@angular/router';
-import { ICourseItem } from './courses-content.model';
+import { ICourseItem  } from '../../../shared/interfaces/courses-content.model';
 @Component({
   selector: 'app-course',
   templateUrl: './course.component.html',

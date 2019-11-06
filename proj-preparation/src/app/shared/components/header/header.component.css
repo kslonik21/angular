@@ -1,0 +1,22 @@
+header {
+  margin-top: 20px;
+  padding: 6px 20px;
+  display: flex;
+  justify-content: space-between;
+}
+.logo .auth {
+  display: flex;
+  align-items: center;
+}
+.auth button {
+  width: 100px;
+  border: 1px solid #D8A8CB;
+  border-radius: 4px;
+}
+.auth p {
+  font-size: 12px;
+  margin-right: 10px;
+}
+.auth p span {
+  font-weight: 600;
+}
