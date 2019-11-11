@@ -4,7 +4,7 @@
   "description": "Mock backend for Angular course",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index"
+    "start": "node index"
   },
   "author": "",
   "license": "ISC",

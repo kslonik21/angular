@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { ICourseItem } from '../../shared/interfaces/courses-content.model';
+import { LoaderService } from './loader.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class CourseService {
   public pagination = '10';
   private URL = 'http://localhost:3004/courses';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient,private loaderService: LoaderService) {}
 
   public getCoursesWithParams(start: number, textFragment: string = ''): Observable<ICourseItem[]> {
     const params = {start: `${start}`, count: this.pagination, textFragment: textFragment};
@@ -32,4 +33,10 @@ export class CourseService {
   public updateCourse(course: ICourseItem): Observable<ICourseItem> {
     return this.http.put<ICourseItem>(`${this.URL}/${course.id}`, course);
   }
+  public onEnd() {
+    this.loaderService.hide();
+  }
+  private showLoader(): void {
+       this.loaderService.show();
+   }
 }

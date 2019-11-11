@@ -1,0 +1,26 @@
+<!-- <p>Authors:</p>
+<select [formControl]="authorsControl" >
+   <option [value]="author" *ngFor="let author of authors">
+     {{author.name}}
+   </option>
+ </select> -->
+
+ <div class="autocomplete">
+   <div class="chips-input-container">
+     <input name="suggestion"
+            type="text" placeholder="author"
+            (click)="suggest()"
+            [formControl]="authorsControl"/>
+     <div class="author-chip" *ngFor="let author of authorSelects">
+       {{author.name}}
+       <span (click)="deleteSelects(author)" class="delete-icon-chip">&#10006;</span>
+     </div>
+   </div>
+     <div class="autocomplete-items" *ngIf="show">
+       <div *ngFor="let author of authors"
+            [ngClass]="isSelected(author) ? 'selected-suggestion' : ''"
+            (click)="selectSuggestion(author)">
+            <span>{{ author.name }}</span>
+        </div>
+     </div>
+ </div>

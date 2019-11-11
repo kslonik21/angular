@@ -5,12 +5,14 @@ import { AddCourseComponent } from './components/add-course/add-course.component
 import { CreationDateComponent } from './components/creation-date/creation-date.component';
 import { DurationComponent } from './components/duration/duration.component';
 import { SharedModule } from '../shared/shared.module';
+import { AuthorsComponent } from './components/authors/authors.component';
 
 @NgModule({
   declarations: [
     AddCourseComponent,
     CreationDateComponent,
-    DurationComponent
+    DurationComponent,
+    AuthorsComponent
   ],
   imports: [
     CommonModule,

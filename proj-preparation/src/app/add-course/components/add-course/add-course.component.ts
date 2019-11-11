@@ -1,10 +1,11 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, FormArray } from '@angular/forms';
 import { CourseService } from '../../../core/service/course.service';
 import { Course } from '../../../shared/entities/course';
 import { DatePipe } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ICourseItem } from '../../../shared/interfaces/courses-content.model';
+import { AuthorsService } from '../../../core/service/authors.service';
 
 @Component({
   selector: 'app-add-course',
@@ -19,18 +20,21 @@ export class AddCourseComponent implements OnInit {
   public descriptionControl: FormControl = new FormControl();
   public creationControl: FormControl = new FormControl();
   public durationControl: FormControl = new FormControl();
+  public authorsControl: FormControl = new FormControl([]);
   public courseForm: FormGroup = new FormGroup({
     title: this.titleControl,
     creationDate: this.creationControl,
     duration: this.durationControl,
     description: this.descriptionControl,
+    authors: this.authorsControl
   });
   private courseExist = false;
   constructor(
     private router:Router,
     private activatedRoute: ActivatedRoute,
     private courseService: CourseService,
-    private datePipe: DatePipe
+    private datePipe: DatePipe,
+    private authorsService: AuthorsService
   ){}
 
   public ngOnInit() {

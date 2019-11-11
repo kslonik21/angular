@@ -1,0 +1,64 @@
+.autocomplete {
+  position: relative;
+}
+.chips-input-container {
+  display: flex;
+  flex-direction: column;
+}
+input {
+  height: 23px;
+  width: 160px;
+  margin-bottom: 15px;
+  background-color: #F6F6FD;
+  outline: none;
+  border: 1px solid #BBB9C8;
+  border-radius: 4px;
+  text-indent: 10px;
+  font-family: Calibri, sans-serif;
+  font-size: 12px;
+}
+input:hover {
+  border:none;
+  border-radius: 0px;
+}
+.autocomplete-items {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  margin-top: 15px;
+}
+.selected-suggestion {
+  background-color: #F6F6FD !important;
+  color: black;
+}
+.autocomplete-items div {
+  padding: 10px;
+  cursor: pointer;
+}
+.autocomplete-items div:hover {
+  background-color: #a695957a;
+}
+
+.author-chip {
+  background-color: #F6F6FD;
+  outline: none;
+  border: 1px solid #BBB9C8;
+  padding: 4px 0px;
+  border-radius: 10px;
+  width: 150px;
+  text-align: center;
+}
+
+.delete-icon-chip {
+  color: white;
+  opacity: 0.7;
+  cursor: pointer;
+  float: right;
+  position: relative;
+  right: 7px;
+  font-size: 12px;
+}
+.delete-icon-chip:hover {
+  opacity: 1;
+}

@@ -10,7 +10,6 @@ import { AddCourseModule } from './add-course/add-course.module';
 import { CanActivateGuard } from './shared/guards/canactivate.guard';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthInterceptor } from './shared/interceptors/auth.interceptor';
-
 import { ROUTES } from './app.routes';
 
 
