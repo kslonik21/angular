@@ -1,5 +1,5 @@
-import { IUser } from '../interfaces/login.model';
-import { IName } from '../interfaces/name.model';
+import { IUser } from './login.model';
+import { IName  } from './name.model';
 
 export class User implements IUser {
   id: number;

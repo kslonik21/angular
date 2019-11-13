@@ -1,8 +1,6 @@
-<div *ngIf='getBreadcrumbsLength() > 1'>
-  <span *ngFor='let breadcrumb of getBreadcrumbs(); let last = last; let index = index'>
-    <span (click)='navigateFromBreadcrumbs(index)' *ngIf='!last' class='clickable'>{{breadcrumb}}</span>
-    <span *ngIf='!last'> / </span>
-    <span *ngIf='last' class='last'>{{getLastBreadcrumb()}}</span>
-  </span>
-</div>
-<div *ngIf='getBreadcrumbsLength() === 1'>{{getBreadcrumbs()[0]}}</div>
+<nav *ngIf='isAuthenticated()' class="wrapper" >
+  <a href="/courses">
+    Courses /
+  </a>
+  <a>{{title}}</a>
+</nav>

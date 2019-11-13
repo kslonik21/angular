@@ -7,7 +7,7 @@
 
  <div class="autocomplete">
    <div class="chips-input-container">
-     <input name="suggestion"
+     <input class="suggest-authors" name="suggestion"
             type="text" placeholder="author"
             (click)="suggest()"
             [formControl]="authorsControl"/>
@@ -17,7 +17,7 @@
      </div>
    </div>
      <div class="autocomplete-items" *ngIf="show">
-       <div *ngFor="let author of authors"
+       <div class="authors" *ngFor="let author of authors"
             [ngClass]="isSelected(author) ? 'selected-suggestion' : ''"
             (click)="selectSuggestion(author)">
             <span>{{ author.name }}</span>

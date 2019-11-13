@@ -1,11 +1,11 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormControl, FormGroup, FormArray } from '@angular/forms';
 import { CourseService } from '../../../core/service/course.service';
-import { Course } from '../../../shared/entities/course';
 import { DatePipe } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ICourseItem } from '../../../shared/interfaces/courses-content.model';
 import { AuthorsService } from '../../../core/service/authors.service';
+import { ICourseItem } from '../../../shared/models/courses-content.model';
+import { Course } from '../../../shared/models/course';
 
 @Component({
   selector: 'app-add-course',
@@ -41,9 +41,11 @@ export class AddCourseComponent implements OnInit {
     this.activatedRoute.params
       .subscribe(data => {
         if(data.id!=='new') {
-          this.course = this.courseService.getCourseById(+data.id);
+           this.courseService.getCourseById(+data.id).subscribe((res:ICourseItem) => {
+             this.course = res;
           this.setFormValues();
           this.courseExist = true;
+        })
         }
       })
   }
@@ -55,8 +57,7 @@ export class AddCourseComponent implements OnInit {
         const titleValue = this.courseForm.get('title').value;
         const durationValue = this.courseForm.get('duration').value;
         const descriptionValue = this.courseForm.get('description').value;
-        const topRated = false;
-        this.course = new Course(topRated,id,titleValue,Date.now(),durationValue,descriptionValue);
+        this.course = new Course({id:id,title:titleValue,creationDate:Date.now(),duration:durationValue,description:descriptionValue});
         this.setFormValues();
         this.courseService
           .createCourse(this.course)
@@ -66,13 +67,13 @@ export class AddCourseComponent implements OnInit {
   public updateTargetCourse() {
     this.activatedRoute.params
       .subscribe(data => {
-        const targetCourse = this.courseService.getCourseById(+data.id);
-        const {topRated} = targetCourse;
+        const targetCourse = this.courseService.getCourseById(+data.id).subscribe(val => val);
+        // const topRated = targetCourse.topRated;
         const titleValue = this.courseForm.get('title').value;
         const durationValue = this.courseForm.get('duration').value;
         const descriptionValue = this.courseForm.get('description').value;
         const id = data.id
-        this.course = new Course(topRated,id,titleValue,Date.now(),durationValue,descriptionValue)
+        this.course = new Course({id:id,title:titleValue,creationDate:Date.now(),duration:durationValue,description:descriptionValue})
         this.setFormValues();
         this.courseService
           .updateCourse(this.course)

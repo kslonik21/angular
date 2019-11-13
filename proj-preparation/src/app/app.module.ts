@@ -11,6 +11,7 @@ import { CanActivateGuard } from './shared/guards/canactivate.guard';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthInterceptor } from './shared/interceptors/auth.interceptor';
 import { ROUTES } from './app.routes';
+import { LoaderInterceptor } from './shared/interceptors/loader.interceptor';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { ROUTES } from './app.routes';
   ],
   providers: [
     CanActivateGuard,
-    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
+    {provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true}
   ],
   bootstrap: [AppComponent]
 })

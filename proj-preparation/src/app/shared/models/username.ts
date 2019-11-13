@@ -1,5 +1,4 @@
-import { IName } from '../interfaces/name.model';
-
+import { IName } from './name.model';
 export class UserName implements IName {
   first: string;
   last: string;

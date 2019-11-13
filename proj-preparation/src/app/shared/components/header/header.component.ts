@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../core/service/auth.service';
-import { IUser } from '../../interfaces/login.model';
-import { IName } from '../../interfaces/name.model';
-
+import { IName } from '../../models/name.model';
+import { filter } from 'rxjs/operators';
+import { IUser } from '../../models/login.model';
 
 @Component({
   selector: 'app-header',
@@ -21,11 +21,11 @@ export class HeaderComponent implements OnInit {
   }
   public initUser() {
     this.authService.userSubject
-      .subscribe((user: IUser) => {
-        if (user) {
-          this.name = user.name;
-          console.log(this.name);
-        }
+      .pipe(
+        filter(user => user)
+      )
+      .subscribe(({name}) => {
+        this.name = name;
       })
   }
   public onLogout(): void {

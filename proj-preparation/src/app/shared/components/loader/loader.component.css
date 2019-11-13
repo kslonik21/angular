@@ -1,13 +1,14 @@
 .overlay {
   top: 0;
   left: 0;
-  height: 100%;
-  width: 100%;
-  position: fixed;
+  height: 100vh;
+  width: 100vw;
+  position: absolute;
   background-color: rgba(0, 0, 0, 0.35);
   text-align: center;
   line-height: 100vh;
   font-size: 20px;
   color: #FF0020;
   z-index: 99;
+  position: fixed;
 }

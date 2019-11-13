@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { ICourseItem } from '../../shared/interfaces/courses-content.model';
 import { LoaderService } from './loader.service';
+import { ICourseItem } from '../../shared/models/courses-content.model';
 
 @Injectable({
   providedIn: 'root'
@@ -24,8 +24,8 @@ export class CourseService {
   public createCourse(course: ICourseItem): Observable<ICourseItem> {
     return this.http.post<ICourseItem>(this.URL, course);
   }
-  public getCourseById(id: number): ICourseItem {
-    return this.courses.find(course => course.id === id);
+  public getCourseById(id: number):Observable<ICourseItem> {
+    return this.http.get<ICourseItem>(`${this.URL}/${id}`);
   }
   public deleteCourse(id: number): Observable<ICourseItem> {
     return this.http.delete<ICourseItem>(`${this.URL}/${id}`);
@@ -33,10 +33,4 @@ export class CourseService {
   public updateCourse(course: ICourseItem): Observable<ICourseItem> {
     return this.http.put<ICourseItem>(`${this.URL}/${course.id}`, course);
   }
-  public onEnd() {
-    this.loaderService.hide();
-  }
-  private showLoader(): void {
-       this.loaderService.show();
-   }
 }

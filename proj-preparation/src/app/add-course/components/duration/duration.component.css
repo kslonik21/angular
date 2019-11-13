@@ -1,17 +1,16 @@
-
-input {
-height: 23px;
-width: 160px;
-margin-bottom: 15px;
-background-color: #F6F6FD;
-outline: none;
-border: 1px solid #BBB9C8;
-border-radius: 4px;
-text-indent: 10px;
-font-family: Calibri, sans-serif;
-font-size: 12px;
+.duration {
+  height: 23px;
+  width: 160px;
+  margin-bottom: 15px;
+  background-color: #F6F6FD;
+  outline: none;
+  border: 1px solid #BBB9C8;
+  border-radius: 4px;
+  text-indent: 10px;
+  font-family: Calibri, sans-serif;
+  font-size: 12px;
 }
 
 span {
-margin-left: 10px;
+  margin-left: 10px;
 }

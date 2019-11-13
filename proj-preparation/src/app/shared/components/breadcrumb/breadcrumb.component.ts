@@ -1,38 +1,51 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
+import { Subject, Observable } from 'rxjs';
+import { filter, map, takeUntil } from 'rxjs/operators';
 import { CourseService } from '../../../core/service/course.service';
+import { ICourseItem } from '../../models/courses-content.model';
+import { IName } from '../../models/name.model';
+import { AuthService } from '../../../core/service/auth.service';
 
 @Component({
   selector: 'app-breadcrumb',
   templateUrl: './breadcrumb.component.html',
   styleUrls: ['./breadcrumb.component.css']
 })
-export class BreadcrumbComponent {
-  constructor(private router: Router, private coursesService: CourseService) {}
-
-  public getBreadcrumbsLength() {
-    return this.router.url.slice(1).split('/').length;
+export class BreadcrumbComponent implements OnInit {
+  public title : string = '';
+  public sub$: any;
+  public showBreadcrumbs = false;
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private router: Router,
+    private coursesService: CourseService,
+    private authService: AuthService
+  ) {}
+  public isAuthenticated(): boolean {
+    return this.authService.isAuthenticated();
   }
-  public getBreadcrumbs() {
-    return this.router.url.slice(1).split('/');
-  }
-  public getLastBreadcrumb() {
-    const breadcrumbs: string[] = this.getBreadcrumbs();
-    let lastBreadcrumb: string = breadcrumbs[breadcrumbs.length-1];
-    if (lastBreadcrumb !== 'new') {
-      lastBreadcrumb = this.coursesService.getCourseById(+lastBreadcrumb).title;
-    }
-    return lastBreadcrumb;
-  }
-  public navigateFromBreadcrumbs(index: number): void {
-    const breadcrumbs: string[] = this.getBreadcrumbs();
-    let navigateBreadcrumbs = '/';
-    for (let i = 0; i < index + 1; i++) {
-      navigateBreadcrumbs += breadcrumbs[i];
-      if (i !== index) {
-        navigateBreadcrumbs += '/';
-      }
-    }
-    this.router.navigateByUrl(navigateBreadcrumbs);
-  }
-}
+  public ngOnInit() {
+     this.sub$ = this.router.events.subscribe((value) => {
+       if (value instanceof NavigationEnd) {
+         const path = value.url.split('/');
+         const id = path[2];
+         if (id && path[1] === 'courses') {
+           this.showBreadcrumbs = true;
+           if (id === 'new') {
+             this.title = id;
+           } else {
+             this.coursesService
+                .getCourseById(+id)
+                .subscribe((res: ICourseItem) =>
+                  this.title = res.title
+                );
+           }
+         }
+       }
+     });
+   }
+   ngOnDestroy() {
+     if (this.sub$) { this.sub$.unsubscribe(); }
+   }
+ }

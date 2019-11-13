@@ -3,13 +3,13 @@ import { Observable, Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
-import { IUser } from '../../shared/interfaces/login.model';
+import { IUser } from '../../shared/models/login.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  public userSubject = new Subject<IUser>();
+  public userSubject = new Subject<any>();
   public tokenLocalStorageKey = 'token';
   private URL = 'http://localhost:3004/auth';
 

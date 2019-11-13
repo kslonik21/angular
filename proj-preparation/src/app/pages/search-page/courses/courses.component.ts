@@ -1,7 +1,8 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { CourseService } from '../../../core/service/course.service';
 import { Router } from '@angular/router';
-import { ICourseItem } from '../../../shared/interfaces/courses-content.model';
+import { LoaderService } from '../../../core/service/loader.service';
+import { ICourseItem } from '../../../shared/models/courses-content.model';
 
 @Component({
   selector: 'app-courses',
@@ -13,9 +14,10 @@ export class CoursesComponent implements OnInit {
   public currentPage = 0;
   public lastPage = false;
   private searchValue: string;
-  constructor(private coursesService: CourseService,private router:Router) {}
+  constructor(private coursesService: CourseService,private router:Router,private loaderService: LoaderService) {}
   public ngOnInit(): void {
     this.getCourses();
+    this.loaderService.loaderState.subscribe(val=>console.log(val));
   }
   private getCourses(): void {
     this.coursesService

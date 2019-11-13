@@ -1,8 +1,11 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
-import { AuthService } from '../../../core/service/auth.service';
 import { Router } from '@angular/router';
-import { IUser } from '../../interfaces/login.model';
-import { LoaderService } from '../../../core/service/loader.service';
+import { tap } from 'rxjs/operators';
+import { AuthService } from '../../core/service/auth.service';
+import { IUser } from '../../shared/models/login.model';
+import { LoaderService } from '../../core/service/loader.service';
+
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -15,15 +18,17 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     this.authService.logout();
   }
-  constructor(private router: Router,private authService: AuthService,private loaderService: LoaderService){}
+  constructor(
+    private router: Router,
+    private authService: AuthService,
+    private loaderService: LoaderService
+  ){}
   public logIn() {
     this.authService
       .login(this.login,this.password)
       .subscribe(
         () => this.router.navigate(['courses']),
         error => alert(error.error),
-        this.onEnd()
-
       )
   }
   public onEnd() {

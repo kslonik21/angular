@@ -1,7 +1,7 @@
 import { Component,OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-// import { LoaderService } from '../../services/loader.service';
+import { Observable,Subscription } from 'rxjs';
 import { LoaderService } from '../../../core/service/loader.service';
+import { ILoader } from '../../models/loader.model';
 
 @Component({
   selector: 'app-loader',
@@ -9,10 +9,7 @@ import { LoaderService } from '../../../core/service/loader.service';
   styleUrls: ['./loader.component.css']
 })
 export class LoaderComponent implements OnInit {
-  public isLoading;
-
+  public isLoading: Subject<boolean> = this.loaderService.isLoading;a
   constructor(private loaderService: LoaderService) {}
-  ngOnInit() {
-    this.loaderService.loaderState.subscribe(val => this.isLoading = val);
-  }
+  ngOnInit() {}
 }

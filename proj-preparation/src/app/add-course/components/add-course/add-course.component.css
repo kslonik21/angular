@@ -11,7 +11,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  /* background-color: #ECEAF9; */
   border-radius: 4px;
 }
 
@@ -20,7 +19,7 @@
   justify-content: space-between;
 }
 
-input {
+.title {
   height: 23px;
   width: 400px;
   margin-bottom: 15px;
@@ -33,16 +32,16 @@ input {
   font-size: 12px;
 }
 
-input::placeholder {
+.title::placeholder {
   color: #BBB9C8;
   font-size: 12px;
 }
 
-input:focus::placeholder {
+.title:focus::placeholder {
   color: transparent;
 }
 
-textarea {
+.description {
   height: 80px;
   width: 400px;
   margin-bottom: 15px;
@@ -56,16 +55,16 @@ textarea {
   font-size: 12px;
 }
 
-textarea::placeholder {
+.description::placeholder {
   color: #BBB9C8;
   font-size: 12px;
 }
 
-textarea:focus::placeholder {
+.description:focus::placeholder {
   color: transparent;
 }
 
-button {
+.save-course,.cancel-edit {
   height: 30px;
   width: 100px;
   padding: 5px 15px;
@@ -77,12 +76,12 @@ button {
   transition: .2s ease-in-out all;
 }
 
-button:hover {
+.save-course,.cancel-edit:hover {
   box-shadow: 0 0 12px 0 rgba(115, 115, 255, 0.4);
   cursor: pointer;
 }
 
-button:active {
+.save-course,.cancel-edit:active {
   box-shadow: 0 0 4px 0 rgba(115, 115, 255, 0.4);
   transition: none;
 }

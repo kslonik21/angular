@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { IAuthors } from '../../shared/interfaces/authors.model';
+import { IAuthors } from '../../shared/models/authors.model';
 
 @Injectable({
   providedIn: 'root'
