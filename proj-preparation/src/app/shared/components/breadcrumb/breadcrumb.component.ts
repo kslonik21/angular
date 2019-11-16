@@ -26,26 +26,28 @@ export class BreadcrumbComponent implements OnInit {
     return this.authService.isAuthenticated();
   }
   public ngOnInit() {
-     this.sub$ = this.router.events.subscribe((value) => {
-       if (value instanceof NavigationEnd) {
-         const path = value.url.split('/');
-         const id = path[2];
-         if (id && path[1] === 'courses') {
-           this.showBreadcrumbs = true;
-           if (id === 'new') {
-             this.title = id;
-           } else {
-             this.coursesService
-                .getCourseById(+id)
-                .subscribe((res: ICourseItem) =>
-                  this.title = res.title
-                );
-           }
-         }
-       }
-     });
-   }
-   ngOnDestroy() {
-     if (this.sub$) { this.sub$.unsubscribe(); }
-   }
- }
+    this.sub$ = this.router.events.subscribe((value) => {
+      if (value instanceof NavigationEnd) {
+        const path = value.url.split('/');
+        const id = path[2];
+        if (id && path[1] === 'courses') {
+          this.showBreadcrumbs = true;
+          if (id === 'new') {
+            this.title = id;
+          } else {
+            this.coursesService
+              .getCourseById(+id)
+              .subscribe((res: ICourseItem) =>
+                this.title = res.title
+              );
+            }
+          }
+      }
+    });
+  }
+  ngOnDestroy() {
+    if (this.sub$) {
+      this.sub$.unsubscribe();
+    }
+  }
+}
