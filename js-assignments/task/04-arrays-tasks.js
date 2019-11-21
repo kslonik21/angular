@@ -38,7 +38,7 @@ function findElement(arr, value) {
  *    5 => [ 1, 3, 5, 7, 9 ]
  */
 function generateOdds(len) {
-  return new Array(len).fill(0).map((val,i) => 2*i+1);
+  return  Array.from({length:len},(_v,i) => i*2+1);
 }
 
 
@@ -85,7 +85,7 @@ function getArrayOfPositives(arr) {
  *    [ 'cat, 'dog', 'raccon' ] => [ 'cat', 'dog', 'racoon' ]
  */
 function getArrayOfStrings(arr) {
-   return arr.filter(item => typeof item == 'string');
+   return arr.filter(item => typeof item === 'string');
 }
 
 /**
@@ -275,12 +275,7 @@ function getSecondItems(arr) {
  *  [ 1,2,3,4,5 ] => [ 1, 2,2, 3,3,3, 4,4,4,4, 5,5,5,5,5 ]
  */
 function propagateItemsByPositionIndex(arr) {
-  return arr.reduce(
-    (acc,curr,i) => {
-      [...Array(i+1)].map(item => acc[acc.length] = curr)
-      return acc;
-    },[]
-  )
+  return arr.reduce((accum,val,index) => [...accum,...Array.from({length:index+1},(_v) => val)], []);
 }
 
 
@@ -316,7 +311,7 @@ function get3TopItems(arr) {
  *   [ 1, '2' ] => 1
  */
 function getPositivesCount(arr) {
-    return arr.filter(item => typeof item=='number'? item>0:'').length;
+    return arr.filter(item => typeof item==='number'&&item>0).length;
 }
 
 /**
@@ -461,7 +456,12 @@ function sortCitiesArray(arr) {
  *           [0,0,0,0,1]]
  */
 function getIdentityMatrix(n) {
-   throw new Error('Not implemented');
+  let matrix = Array.from({length:n},(item,i) => {
+    item = Array.from({length:n},(v,i) => 0);
+    item[i] = 1;
+    return item;
+  })
+  return matrix;
 }
 
 /**
@@ -478,11 +478,10 @@ function getIdentityMatrix(n) {
  *     3, 3   => [ 3 ]
  */
 function getIntervalArray(start, end) {
-  let result = new Array(end-start).fill(0);
-  return result.reduce((prev) => {
-    prev.push(prev[prev.length-1]+1);
-    return prev;
-  },[start]);
+  if(start === end) {
+    return [start];
+  }
+  return Array.from({length:end-start+1},(v,ind) => start + ind);
 }
 
 /**
@@ -497,8 +496,11 @@ function getIntervalArray(start, end) {
  *   [ 1, 1, 2, 2, 3, 3, 4, 4] => [ 1, 2, 3, 4]
  */
 function distinct(arr) {
-  return Array.from(new Set(arr));
+  return arr.reduce((prev,cur) => {
+    return (prev.indexOf(cur) < 0) ? prev.concat([cur]) : prev;
+  },[])
 }
+
 
 /**
  * Groups elements of the specified array by key.
@@ -571,7 +573,10 @@ function selectMany(arr, childrenSelector) {
  *   [[[ 1, 2, 3]]], [ 0, 0, 1 ]      => 2        (arr[0][0][1])
  */
 function getElementByIndexes(arr, indexes) {
-
+  indexes.map((item,i) => {
+      arr = arr[item];
+    });
+  return arr;
 }
 
 
