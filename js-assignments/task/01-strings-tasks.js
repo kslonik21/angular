@@ -114,7 +114,7 @@ function removeLeadingAndTrailingWhitespaces(value) {
  *   'cat', 3 => 'catcatcat'
  */
 function repeatString(value, count) {
-    return new String(value).repeat(count);
+    return String(value).repeat(count);
 }
 
 /**
@@ -174,7 +174,7 @@ function convertToUpperCase(str) {
  *   'info@gmail.com' => ['info@gmail.com']
  */
 function extractEmails(str) {
-    throw new Error('Not implemented');
+    return str.split(';');
 }
 
 /**
@@ -221,7 +221,9 @@ function getRectangleString(width, height) {
  *
  */
 function encodeToRot13(str) {
-    throw new Error('Not implemented');
+    return str.replace(/[A-Za-z]/g, function(c) {
+      return String.fromCharCode(c.charCodeAt(0) + (c.toUpperCase() <= "M" ? 13:-13));
+    })
 }
 
 /**
@@ -238,7 +240,7 @@ function encodeToRot13(str) {
  *   isString(new String('test')) => true
  */
 function isString(value) {
-    throw new Error('Not implemented');
+    return typeof value === 'string' || value instanceof String;
 }
 
 
@@ -267,7 +269,9 @@ function isString(value) {
  *   'K♠' => 51
  */
 function getCardId(value) {
-    throw new Error('Not implemented');
+  let cardsSuits = '♣♦♥♠';
+  let cards = 'A234567891JQK';
+  return cards.indexOf(value[0]) + (13 * cardsSuits.indexOf(value[1]));
 }
 
 
