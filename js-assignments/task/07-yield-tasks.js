@@ -33,16 +33,7 @@
  *
  */
 function* get99BottlesOfBeer() {
-  for(let i = 99; i>= 0; i--) {
-    switch(i) {
-      case 1:
-        yield(`${i} bottle of beer on the wall, ${i} bottle of beer.`);
-        yield("Take one down and pass it around, no more bottles of beer on the wall.");
-      case 2:
-        yield(`${i} bottles of beer on the wall, ${i} bottles of beer.`);
-        yield(`Take one down and pass it around, ${i - 1} bottle of beer on the wall.`);
-    }
-  }
+
 }
 
 
